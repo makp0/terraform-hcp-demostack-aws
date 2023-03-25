@@ -44,7 +44,7 @@ resource "aws_route53_record" "workers" {
   name    = "workers-${count.index}.${var.namespace}"
   // name    = "workers-${count.index}"
   type    = "CNAME"
-  records = [element(aws_instance.workers.*.public_dns, count.index)]
+  records = [element(aws_spot_instance_request.workers.*.public_dns, count.index)]
   ttl     = "300"
 
 

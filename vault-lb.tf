@@ -47,7 +47,7 @@ resource "aws_alb_listener" "vault" {
 resource "aws_alb_target_group_attachment" "vault" {
   count            = var.workers
   target_group_arn = aws_alb_target_group.vault.arn
-  target_id        = element(aws_instance.workers.*.id, count.index)
+  target_id        = element(aws_spot_instance_request.workers.*.id, count.index)
   port             = "8200"
 
 }
@@ -106,7 +106,7 @@ resource "aws_alb_listener" "vault_cluster" {
 resource "aws_alb_target_group_attachment" "vault_cluster" {
   count            = var.workers
   target_group_arn = aws_alb_target_group.vault_cluster.arn
-  target_id        = element(aws_instance.workers.*.id, count.index)
+  target_id        = element(aws_spot_instance_request.workers.*.id, count.index)
   port             = "8201"
 
 }

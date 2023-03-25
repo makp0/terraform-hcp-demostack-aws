@@ -67,13 +67,13 @@ resource "aws_alb_listener" "traefik-ui" {
 resource "aws_alb_target_group_attachment" "traefik" {
   count            = var.workers
   target_group_arn = aws_alb_target_group.traefik.arn
-  target_id        = element(aws_instance.workers.*.id, count.index)
+  target_id        = element(aws_spot_instance_request.workers.*.id, count.index)
   port             = "8080"
 }
 
 resource "aws_alb_target_group_attachment" "traefik-ui" {
   count            = var.workers
   target_group_arn = aws_alb_target_group.traefik-ui.arn
-  target_id        = element(aws_instance.workers.*.id, count.index)
+  target_id        = element(aws_spot_instance_request.workers.*.id, count.index)
   port             = "8081"
 }

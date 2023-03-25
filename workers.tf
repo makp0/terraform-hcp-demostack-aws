@@ -98,7 +98,7 @@ data "cloudinit_config" "workers" {
 }
 
 
-resource "aws_instance" "workers" {
+resource "aws_spot_instance_request" "workers" {
   count = var.workers
 
   ami           = data.aws_ami.ubuntu.id

@@ -45,7 +45,7 @@ resource "aws_alb_listener" "nomad" {
 resource "aws_alb_target_group_attachment" "nomad" {
   count            = var.workers
   target_group_arn = aws_alb_target_group.nomad.arn
-  target_id        = element(aws_instance.workers.*.id, count.index)
+  target_id        = element(aws_spot_instance_request.workers.*.id, count.index)
   port             = "4646"
 
 }

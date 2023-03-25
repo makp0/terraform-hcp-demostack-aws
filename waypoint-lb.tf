@@ -20,7 +20,7 @@ resource "aws_alb_target_group" "waypoint" {
 resource "aws_alb_target_group_attachment" "waypoint" {
   count            = var.workers
   target_group_arn = aws_alb_target_group.waypoint.arn
-  target_id        = aws_instance.workers[count.index].id
+  target_id        = aws_spot_instance_request.workers[count.index].id
   port             = 9701
 }
 
@@ -56,7 +56,7 @@ resource "aws_alb_target_group" "waypoint-ui" {
 resource "aws_alb_target_group_attachment" "waypoint-ui" {
   count            = var.workers
   target_group_arn = aws_alb_target_group.waypoint-ui.arn
-  target_id        = aws_instance.workers[count.index].id
+  target_id        = aws_spot_instance_request.workers[count.index].id
   port             = 9702
 }
 

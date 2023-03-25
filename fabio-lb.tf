@@ -66,7 +66,7 @@ resource "aws_alb_listener" "fabio-ui" {
 resource "aws_alb_target_group_attachment" "fabio" {
   count            = var.workers
   target_group_arn = aws_alb_target_group.fabio.arn
-  target_id        = element(aws_instance.workers.*.id, count.index)
+  target_id        = element(aws_spot_instance_request.workers.*.id, count.index)
   port             = "9999"
 
 }
@@ -74,7 +74,7 @@ resource "aws_alb_target_group_attachment" "fabio" {
 resource "aws_alb_target_group_attachment" "fabio-ui" {
   count            = var.workers
   target_group_arn = aws_alb_target_group.fabio-ui.arn
-  target_id        = element(aws_instance.workers.*.id, count.index)
+  target_id        = element(aws_spot_instance_request.workers.*.id, count.index)
   port             = "9998"
 
 }
