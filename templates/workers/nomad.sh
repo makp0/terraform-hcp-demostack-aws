@@ -274,7 +274,7 @@ sudo apt install -y jq
 
 echo "--> bootstraping Nomad ACLS"
 nomad acl bootstrap -json > /tmp/nomad_acls.json
-export NOMAD_TOKEN=$(jq -r .SecretID nomad_acls.json)
+export NOMAD_TOKEN=$(jq -r .SecretID /tmp/nomad_acls.json)
 echo "--> sending bootstrap token to Vault"
 vault secrets enable -version=2 -path=nomad kv
 sleep 10
