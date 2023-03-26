@@ -94,7 +94,7 @@ export CHECKPOINT_DISABLE=1
 EOF
 source /etc/profile.d/checkpoint.sh
 
-if [ ${enterprise} == 0 ]
+if [[ ${enterprise} == false ]];
 then
 sudo apt-get install -y \
   vault \
